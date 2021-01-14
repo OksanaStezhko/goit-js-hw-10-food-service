@@ -22,10 +22,6 @@ function setChangedTheme(oldTheme, newTheme) {
   localStorage.setItem('theme', newTheme);
 }
 
-function checkClass(checkedClass) {
-  return bodyRef.classList.contains(checkedClass);
-}
-
 function onChangeTherm(event) {
   if (event.target.checked) {
     setChangedTheme(Theme.LIGHT, Theme.DARK);
