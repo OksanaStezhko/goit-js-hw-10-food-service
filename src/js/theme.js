@@ -6,9 +6,14 @@ const Theme = {
 const checkboxRef = document.querySelector('#theme-switch-toggle');
 const bodyRef = document.body;
 
-function setSavedTheme() {
+function setSavedOrDefaultTheme() {
   const savedTheme = localStorage.getItem('theme');
-  bodyRef.classList.add(savedTheme);
+  if (savedTheme) {
+    bodyRef.classList.add(savedTheme);
+  } else {
+    bodyRef.classList.add(Theme.LIGHT);
+  }
+
   checkboxRef.checked = savedTheme === Theme.DARK;
 }
 
@@ -21,12 +26,12 @@ function checkClass(checkedClass) {
   return bodyRef.classList.contains(checkedClass);
 }
 
-function onChangeTherm() {
-  if (checkClass(Theme.LIGHT)) {
+function onChangeTherm(event) {
+  if (event.target.checked) {
     setChangedTheme(Theme.LIGHT, Theme.DARK);
   } else {
     setChangedTheme(Theme.DARK, Theme.LIGHT);
   }
 }
-setSavedTheme();
+setSavedOrDefaultTheme();
 checkboxRef.addEventListener('change', onChangeTherm);
